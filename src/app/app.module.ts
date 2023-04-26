@@ -1,16 +1,37 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { AircraftsComponent } from './components/aircrafts/aircrafts.component';
+import { AircraftsNavBarComponent } from './components/aircrafts/aircrafts-nav-bar/aircrafts-nav-bar.component';
+import { FormsModule } from '@angular/forms';
+
+import { AircraftEffects } from 'src/ngrx/aircrafts.effects';
+import { LoginComponent } from './components/login/login.component';
+import { combinedReducers } from 'src/ngrx/combineReducers';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavBarComponent,
+    AircraftsComponent,
+    AircraftsNavBarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({state: combinedReducers}),
+    EffectsModule.forRoot([AircraftEffects]),
+    HttpClientModule,
+    FormsModule,
+    StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]

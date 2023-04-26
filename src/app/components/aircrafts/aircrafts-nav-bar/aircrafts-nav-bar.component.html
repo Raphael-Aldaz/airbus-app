@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li>
+        <button class="btn btn-outline-info m-2" (click)="getAllAircraft()" >Tous les avions</button>
+      <button class="btn btn-outline-info m-2" (click)="getDesignedAircraft()" >Avion en etude</button>
+      <button class="btn btn-outline-info m-2" (click)="getConceptedAircraft()" >Avion en construction</button>
+      </li>
+    </ul>
+    <form #f="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="onSearch(f.value)">
+      <input  class="form-control mr-sm-2" type="search" placeholder="Search" [(ngModel)]="aircraft.prog" name="prog" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+    </form>
+  </div>
+</nav>

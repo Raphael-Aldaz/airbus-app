@@ -1,0 +1,33 @@
+<app-aircrafts-nav-bar  />
+
+
+<ng-container *ngIf="aircrafts$ | async as state" [ngSwitch]="state.dataState">
+  <ng-container *ngSwitchCase="dataStateEnum.LOADING">
+    <div class="p-2"> LOADING</div>
+
+  </ng-container>
+
+  <ng-container *ngSwitchCase="dataStateEnum.LOADED">
+    <div class="p-2">LOADED</div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="dataStateEnum.ERROR">
+    <div class="p-2 text-danger">{{state.errorMessage}}</div>
+
+  </ng-container>
+<table class="table">
+  <tr>
+    <th>ID</th><th>Programme</th><th>Etude</th><th>Conception</th>
+  </tr>
+  <tr *ngFor="let aircraft of state.aircraft">
+    <td>{{aircraft.id}}</td>
+    <td>{{aircraft.prog}}</td>
+    <td>{{aircraft.design}}</td>
+    <td>{{aircraft.developpment}}</td>
+
+  </tr>
+
+</table>
+
+</ng-container>
+
