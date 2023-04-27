@@ -1,8 +1,8 @@
 import { Action } from "@ngrx/store";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import { Observable, mergeMap, map, catchError,of, tap } from "rxjs";
+import {concatMap, Observable, mergeMap, map, catchError,of, tap } from "rxjs";
 import { AircraftService } from "src/app/services/aircraft.service";
-import { AircraftActionTypes, GetAllAircraftErrorACTION, GetAllAircraftSuccessACTION, GetUserACTION, GetUserErrorACTION, GetUserSuccessACTION, SearchAircraftAction, UserActionTypes } from "./aircrafts.actions";
+import { AircraftActionTypes, GetAllAircraftErrorACTION, GetAllAircraftSuccessACTION, GetUserACTION, GetUserErrorACTION, GetUserSuccessACTION, SearchAircraftAction, UserActionTypes, UserIsConnectedACTION } from "./aircrafts.actions";
 import { Injectable } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 
@@ -68,16 +68,27 @@ export class AircraftEffects{
     ()=> this.effectActions.pipe(
       ofType(UserActionTypes.GET_USER),
       mergeMap((action : GetUserACTION)=> {
-        console.log(action)
         return this.authService.login(action.payload.value.email, action.payload.value.password).pipe(
-          map((user) =>
-            new GetUserSuccessACTION(user),
+          concatMap((user) =>{
+            if(user.length > 0){
+              console.log(user)
+              return[
+                new GetUserSuccessACTION(user),
+                new UserIsConnectedACTION(true)
+              ];
+            } else {
+              return[
+                new UserIsConnectedACTION(false)
+              ]
+            }
+          }
           ),
           catchError((error) => of(new GetUserErrorACTION(error))),
         )
       })
     )
   )
+
 
 
 

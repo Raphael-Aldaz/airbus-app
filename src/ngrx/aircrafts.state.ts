@@ -16,6 +16,7 @@ export interface AircraftsState {
 }
 export interface UserState {
   user: User[]
+  isConnected : boolean
 
 }
 
@@ -25,6 +26,7 @@ export const aircraftState : AircraftsState = {
   dataState : AircraftsStateEnum.INITIAL
 }
 export const userState : UserState = {
-  user : []
+  user : [],
+  isConnected: false
 }
 

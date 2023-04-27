@@ -7,7 +7,7 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-
+  userConnect$! : Observable<boolean>;
   constructor(private http: HttpClient) { }
 
   public login(email: string, password : string): Observable<any> {

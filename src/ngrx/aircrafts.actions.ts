@@ -24,6 +24,9 @@ export enum UserActionTypes{
   GET_USER = "[User] Get User",
   GET_USER_SUCCESS = "[User] Get User Success",
   GET_USER_ERROR = "[User] Get User Error",
+
+  USER_IS_CONNECTED = "[User] User is Connected",
+
 }
 
 export class GetAllAircraftACTION implements Action {
@@ -98,8 +101,13 @@ export class GetUserErrorACTION implements Action {
   constructor(public payload: string){}
 }
 
+export class UserIsConnectedACTION implements Action {
+  type: UserActionTypes = UserActionTypes.USER_IS_CONNECTED;
+  constructor(public payload:boolean){}
+}
+
 
 
 export type AircraftActions = GetAllAircraftACTION | GetAllAircraftSuccessACTION | GetAllAircraftErrorACTION | GetDesignedAircraftACTION | GetDesignedAircraftSuccessACTION | GetDesignedAircraftACTION | GetDesignedAircraftErrorACTION | GetConceptedAircraftACTION | GetConceptedAircraftSuccessACTION | GetConceptedAircraftErrorACTION | SearchAircraftAction | SearchAircraftSuccessACTION | SearchAircraftErrorACTION;
 
-export type UserActions = GetAllAircraftACTION | GetAllAircraftSuccessACTION | GetAllAircraftErrorACTION
+export type UserActions = GetAllAircraftACTION | GetAllAircraftSuccessACTION | GetAllAircraftErrorACTION | UserIsConnectedACTION

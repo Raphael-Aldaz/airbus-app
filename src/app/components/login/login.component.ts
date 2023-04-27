@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { GetUserACTION } from 'src/ngrx/aircrafts.actions';
+import { GetUserACTION} from 'src/ngrx/aircrafts.actions';
+
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,13 @@ import { GetUserACTION } from 'src/ngrx/aircrafts.actions';
 export class LoginComponent implements OnInit {
 email:string =""
 password:string =""
-constructor(private store:Store<any>){}
-  ngOnInit(): void {
 
+
+
+constructor(private store:Store<any>){
+
+}
+  ngOnInit(): void {
   }
 
   login(value:NgForm){
