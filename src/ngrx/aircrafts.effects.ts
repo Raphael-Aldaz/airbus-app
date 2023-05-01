@@ -2,9 +2,10 @@ import { Action } from "@ngrx/store";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {concatMap, Observable, mergeMap, map, catchError,of, tap } from "rxjs";
 import { AircraftService } from "src/app/services/aircraft.service";
-import { AircraftActionTypes, GetAllAircraftErrorACTION, GetAllAircraftSuccessACTION, GetUserACTION, GetUserErrorACTION, GetUserSuccessACTION, SearchAircraftAction, UserActionTypes, UserIsConnectedACTION } from "./aircrafts.actions";
+import { AddAircraftACTION, AddAircraftSuccessACTION, AircraftActionTypes, GetAllAircraftErrorACTION, GetAllAircraftSuccessACTION, GetUserACTION, GetUserErrorACTION, GetUserSuccessACTION, SearchAircraftAction, UserActionTypes, UserIsConnectedACTION } from "./aircrafts.actions";
 import { Injectable } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
+import { AddAircraftErrorACTION } from "./aircrafts.actions";
 
 //import ofType
 
@@ -55,7 +56,6 @@ export class AircraftEffects{
       ofType(AircraftActionTypes.SEARCH_AIRCRAFTS),
       mergeMap((action: SearchAircraftAction) => {
         return this.aircraftService.searchAircrafts(action.payload.value.prog).pipe(
-          tap(data => console.log(data)),
           map((aircraft) => new GetAllAircraftSuccessACTION(aircraft)),
           catchError((error) => of(new GetAllAircraftErrorACTION(error)))
         )
@@ -71,10 +71,10 @@ export class AircraftEffects{
         return this.authService.login(action.payload.value.email, action.payload.value.password).pipe(
           concatMap((user) =>{
             if(user.length > 0){
-              console.log(user)
+              localStorage.setItem('user', JSON.stringify(user))
               return[
                 new GetUserSuccessACTION(user),
-                new UserIsConnectedACTION(true)
+                new UserIsConnectedACTION(true),
               ];
             } else {
               return[
@@ -89,7 +89,19 @@ export class AircraftEffects{
     )
   )
 
-
+  addAircraftEffect: Observable<Action> = createEffect(
+    ()=> this.effectActions.pipe(
+      ofType(AircraftActionTypes.ADD_AIRCRAFT),
+      mergeMap((action : AddAircraftACTION) => {
+          return this.aircraftService.addAircraft(action.payload.aircraft).pipe(
+            map((aircraft) => new AddAircraftSuccessACTION(aircraft)),
+            catchError((error) => of(new AddAircraftErrorACTION(error)))
+          )
+        }
+      )
+    )
+  )
 
 
 }
+

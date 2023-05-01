@@ -25,4 +25,8 @@ export class AircraftService {
     const params = new HttpParams().set('prog_like',searchText)
     return this.http.get<Aircraft[]>('http://localhost:3000/aircrafts/', {params})
   }
+
+  public addAircraft(aircraft: Aircraft): Observable<Aircraft> {
+    return this.http.post<Aircraft>('http://localhost:3000/aircrafts', aircraft);
+  }
 }

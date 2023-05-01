@@ -18,6 +18,10 @@ export enum AircraftActionTypes{
   SEARCH_AIRCRAFTS = "[Aircraft] Search Aircraft",
   SEARCH_AIRCRAFTS_SUCCESS = "[Aircraft] Search Aircraft Success",
   SEARCH_AIRCRAFTS_ERROR = "[Aircraft] Search Aircraft Error",
+
+  ADD_AIRCRAFT = "[Aircraft] Add Aircraft",
+  ADD_AIRCRAFT_SUCCESS = "[Aircraft] Add Aircraft Success",
+  ADD_AIRCRAFT_ERROR = "[Aircraft] Add Aircraft Error",
 }
 
 export enum UserActionTypes{
@@ -27,6 +31,20 @@ export enum UserActionTypes{
 
   USER_IS_CONNECTED = "[User] User is Connected",
 
+}
+export class AddAircraftACTION implements Action {
+  type: AircraftActionTypes = AircraftActionTypes.ADD_AIRCRAFT;
+  constructor(public payload : any) { }
+}
+
+export class AddAircraftSuccessACTION implements Action {
+  type: AircraftActionTypes = AircraftActionTypes.ADD_AIRCRAFT_SUCCESS;
+  constructor(public payload : Aircraft) { }
+}
+
+export class AddAircraftErrorACTION implements Action {
+  type: AircraftActionTypes = AircraftActionTypes.ADD_AIRCRAFT_ERROR;
+  constructor(public payload : string) { }
 }
 
 export class GetAllAircraftACTION implements Action {

@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { AircraftEffects } from 'src/ngrx/aircrafts.effects';
 import { LoginComponent } from './components/login/login.component';
 import { combinedReducers } from 'src/ngrx/combineReducers';
+import { AddAircraftsComponent } from './components/aircrafts/add-aircrafts/add-aircrafts.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { combinedReducers } from 'src/ngrx/combineReducers';
     NavBarComponent,
     AircraftsComponent,
     AircraftsNavBarComponent,
-    LoginComponent
+    LoginComponent,
+    AddAircraftsComponent
   ],
   imports: [
     BrowserModule,

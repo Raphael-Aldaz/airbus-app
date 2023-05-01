@@ -10,7 +10,7 @@ import { AircraftActionTypes, GetAllAircraftACTION, GetConceptedAircraftACTION, 
 })
 export class AircraftsNavBarComponent implements OnInit {
   value : string ="";
-  aircraft: Aircraft = new Aircraft(0,'', false,false);
+  aircraft: Aircraft = new Aircraft('', false,false);
   @Output() eventEmitter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private store:Store<any>){}

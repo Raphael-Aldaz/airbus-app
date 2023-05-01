@@ -1,33 +1,88 @@
+<app-nav-bar />
 <app-aircrafts-nav-bar  />
+<link
+	href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+	rel="stylesheet">
+<div class="  min-h-screen bg-gray-900"  *ngIf="aircrafts$ | async as state">
 
+	<div class="col-span-12">
+		<div *ngIf="!showAddAircraftForm" class="overflow-auto lg:overflow-visible ">
+			<table class="table text-gray-400 border-separate space-y-6 text-sm">
+				<thead class="bg-gray-800 text-gray-500">
+					<tr>
+						<th class="p-3">ID</th>
+						<th class="p-3 text-left">Program</th>
+						<th class="p-3 text-left">Etude</th>
+						<th class="p-3 text-left">Conception</th>
+            <th class="p-3 text-left">Modification</th>
+            <th class="p-3 text-left">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="bg-gray-800 text-white" *ngFor="let aircraft of state.aircraft">
+						<td class="p-3">
+							{{aircraft.id}}
+						</td>
+						<td class="p-3">
+							{{aircraft.prog}}
+						</td>
+						<td class="p-3 font-bold" *ngIf="aircraft.design === true">
+              <span class="bg-green-400 text-gray-50 rounded-md px-2 p-2">{{aircraft.design}}</span>
+						</td>
+            <td class="p-3 font-bold" *ngIf="aircraft.design === false">
+              <span class="bg-red-400 text-gray-50 rounded-md px-2 p-2 ">{{aircraft.design}}</span>
+						</td>
+            <td class="p-3 font-bold" *ngIf="aircraft.developpment === true">
+              <span class="bg-green-400 text-gray-50 rounded-md px-2 p-2">{{aircraft.developpment}}</span>
+						</td>
+            <td class="p-3 font-bold" *ngIf="aircraft.developpment === false">
+              <span class="bg-red-400 text-gray-50 rounded-md px-2 p-2">{{aircraft.developpment}}</span>
+						</td>
+            <td class="p-3">
 
-<ng-container *ngIf="aircrafts$ | async as state" [ngSwitch]="state.dataState">
-  <ng-container *ngSwitchCase="dataStateEnum.LOADING">
-    <div class="p-2"> LOADING</div>
+						</td>
+						<td class="p-3 ">
+							<a href="#" class="text-gray-400 hover:text-gray-100  mx-2">
+								<i class="material-icons-outlined text-base">edit</i>
+							</a>
+							<a href="#" class="text-gray-400 hover:text-gray-100  ml-2">
+								<i class="material-icons-round text-base">delete_outline</i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+  <button (click)="showAddAircraftForm = true" *ngIf="state.aircraft.length > 0 && !showAddAircraftForm" class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-700">
+    Ajouter un avion
+  </button>
+  <ng-container *ngIf="showAddAircraftForm">
+    <app-add-aircrafts />
 
   </ng-container>
 
-  <ng-container *ngSwitchCase="dataStateEnum.LOADED">
-    <div class="p-2">LOADED</div>
-  </ng-container>
+</div>
+<style>
+	.table {
+		border-spacing: 0 15px;
+	}
 
-  <ng-container *ngSwitchCase="dataStateEnum.ERROR">
-    <div class="p-2 text-danger">{{state.errorMessage}}</div>
+	i {
+		font-size: 1rem !important;
+	}
 
-  </ng-container>
-<table class="table">
-  <tr>
-    <th>ID</th><th>Programme</th><th>Etude</th><th>Conception</th>
-  </tr>
-  <tr *ngFor="let aircraft of state.aircraft">
-    <td>{{aircraft.id}}</td>
-    <td>{{aircraft.prog}}</td>
-    <td>{{aircraft.design}}</td>
-    <td>{{aircraft.developpment}}</td>
+	.table tr {
+		border-radius: 20px;
+	}
 
-  </tr>
+	tr td:nth-child(n+5),
+	tr th:nth-child(n+5) {
+		border-radius: 0 .625rem .625rem 0;
+	}
 
-</table>
-
-</ng-container>
-
+	tr td:nth-child(1),
+	tr th:nth-child(1) {
+		border-radius: .625rem 0 0 .625rem;
+	}
+</style>
