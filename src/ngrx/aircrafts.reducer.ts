@@ -32,12 +32,13 @@ export function AircraftReducer(state: AircraftsState = aircraftState, action:Ac
       return{...state, dataState:AircraftsStateEnum.LOADED, aircraft:(<AircraftActions>action).payload}
     case AircraftActionTypes.SEARCH_AIRCRAFTS_ERROR:
       return{...state, dataState:AircraftsStateEnum.ERROR, errorMessage : (<AircraftActions>action).payload}
-    case AircraftActionTypes.ADD_AIRCRAFT:
+
+  /*     case AircraftActionTypes.ADD_AIRCRAFT:
       return{...state, dataState:AircraftsStateEnum.LOADING}
     case AircraftActionTypes.ADD_AIRCRAFT_SUCCESS:
       return{...state, dataState:AircraftsStateEnum.LOADED, aircraft:(<AircraftActions>action).payload}
     case AircraftActionTypes.ADD_AIRCRAFT_ERROR:
-      return{...state, dataState:AircraftsStateEnum.ERROR, errorMessage : (<AircraftActions>action).payload}
+      return{...state, dataState:AircraftsStateEnum.ERROR, errorMessage : (<AircraftActions>action).payload} */
 
     default :
       return{...state}

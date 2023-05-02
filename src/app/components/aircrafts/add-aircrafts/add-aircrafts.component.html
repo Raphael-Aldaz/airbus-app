@@ -1,5 +1,5 @@
 <ng-container>
-  <form #f="ngForm" (ngSubmit)="createPlane(f.value)" class="bg-white p-4 rounded shadow w-50 m-auto">
+  <form [formGroup]="createAircraftFormGroupe" (ngSubmit)="createPlane()" class="bg-white p-4 rounded shadow w-50 m-auto">
     <label for="name" class="text-gray-500 mb-2">Aircraft Name</label>
     <input
       type="text"
@@ -7,7 +7,7 @@
       id="name"
       name="name"
       required
-      [(ngModel)]="prog"
+      formControlName="prog"
       />
     <fieldset class="relative z-0 w-full p-px mb-5">
       <legend class="absolute text-gray-500 transform scale-75 -top-3 origin-0">Design</legend>
@@ -18,7 +18,7 @@
             name="design"
             value="1"
             class="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-            [(ngModel)]="design"
+            formControlName="design"
           />
           In progress
         </label>
@@ -28,7 +28,7 @@
             name="design"
             value="2"
             class="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-            [(ngModel)]="design"
+            formControlName="design"
           />
           Done
         </label>
@@ -36,7 +36,7 @@
       <span class="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
     </fieldset>
 
-    <fieldset class="relative z-0 w-full p-px mb-5">
+    <fieldset   class="relative z-0 w-full p-px mb-5">
       <legend class="absolute text-gray-500 transform scale-75 -top-3 origin-0">Developpment</legend>
       <div class="block pt-3 pb-2 space-x-4" >
         <label>
@@ -45,7 +45,7 @@
             name="developpment"
             value="1"
             class="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-            [(ngModel)]="devloppment"
+            formControlName="developpment"
           />
           In progress
         </label>
@@ -55,7 +55,7 @@
             name="developpment"
             value="2"
             class="mr-2 text-black border-2 border-gray-300 focus:border-gray-300 focus:ring-black"
-            [(ngModel)]="devloppment"
+            formControlName="developpment"
           />
           Done
         </label>
@@ -63,9 +63,9 @@
       <span class="text-sm text-red-600 hidden" id="error">Option has to be selected</span>
     </fieldset>
 
-    <fieldset>
+    <fieldset formGroupName = "options">
       <legend class="text-lg font-medium mb-2">Sélectionnez les options a ajouter :</legend>
-      <div class="flex flex-col">
+      <div  class="flex flex-col">
 
         <label class="inline-flex items-center mt-3">
           <input
@@ -73,6 +73,7 @@
             name="wings"
             class="form-checkbox h-5 w-5 text-green-500"
             value="wings"
+            formControlName="wings"
 
             >
           <span class="ml-2 text-gray-700">Ailes</span>
@@ -83,7 +84,9 @@
             type="checkbox"
             name="engines"
             class="form-checkbox h-5 w-5 text-green-500"
-            value="engines">
+            value="engines"
+            formControlName="engines"
+            >
           <span class="ml-2 text-gray-700">Moteurs</span>
         </label>
 
@@ -92,16 +95,20 @@
             type="checkbox"
             name="tail"
             class="form-checkbox h-5 w-5 text-green-500"
-            value="tail">
+            value="tail"
+            formControlName="tail"
+            >
           <span class="ml-2 text-gray-700">Empennage</span>
         </label>
 
         <label class="inline-flex items-center mt-3">
           <input
             type="checkbox"
-            name="landing-gear"
+            name="landingGear"
             class="form-checkbox h-5 w-5 text-green-500"
-            value="landing-gear">
+            value="landing-gear"
+            formControlName="landingGear"
+            >
           <span class="ml-2 text-gray-700">Train d'atterrissage</span>
         </label>
 
@@ -110,12 +117,14 @@
             type="checkbox"
             name="cockpit"
             class="form-checkbox h-5 w-5 text-green-500"
-            value="cockpit">
+            value="cockpit"
+            formControlName="cockpit"
+            >
           <span class="ml-2 text-gray-700">Cockpit / Cabine de pilotage</span>
         </label>
       </div>
     </fieldset>
-    <button type="submit" class="bg-sky-600 text-white p-2 rounded-lg mt-5" [disabled]="!f.form.valid">Valider</button>
+    <button type="submit" class="bg-sky-600 text-white p-2 rounded-lg mt-5">Valider</button>
     <button type="submit" class="bg-red-600 text-white p-2 rounded-lg ml-5 mt-5">Annuler</button>
   </form>
 

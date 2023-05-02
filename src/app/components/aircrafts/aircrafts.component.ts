@@ -13,7 +13,7 @@ import { Aircraft } from 'src/app/model/aircraft.model';
 export class AircraftsComponent implements OnInit  {
   aircrafts$:Observable<AircraftsState> |null = null;
   readonly dataStateEnum = AircraftsStateEnum;
-  showAddAircraftForm = true;
+  showAddAircraftForm = false;
 
   constructor( private store:Store<any>){}
   ngOnInit(): void {

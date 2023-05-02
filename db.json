@@ -5,55 +5,57 @@
       "prog": "A350",
       "design": true,
       "developpment": false,
-      "modification":[
-        {
-
-      }
-    ]
+      "modification": [
+        {}
+      ]
     },
     {
       "id": 2,
       "prog": "A320",
       "design": false,
       "developpment": true,
-      "modification":[
-        {
-
-      }
-    ]
+      "modification": [
+        {}
+      ]
     },
     {
       "id": 3,
       "prog": "A380",
       "design": false,
       "developpment": true,
-      "modification":[
-        {
-
-      }
-    ]
+      "modification": [
+        {}
+      ]
     },
     {
       "id": 4,
       "prog": "A400M",
       "design": false,
       "developpment": false,
-      "modification":[
-        {
-
-      }
-    ]
+      "modification": [
+        {}
+      ]
     },
     {
       "id": 5,
       "prog": "A330",
       "design": true,
       "developpment": true,
-      "modification":[
-        {
+      "modification": [
+        {}
+      ]
+    },
 
-      }
-    ]
+    {
+      "prog": "test",
+      "design": false,
+      "developpment": false,
+      "modification": [
+        "wings",
+        "engines",
+        "tail"
+      ],
+      "id": 9
     }
   ],
   "users": [

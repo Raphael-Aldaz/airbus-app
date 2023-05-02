@@ -93,7 +93,9 @@ export class AircraftEffects{
     ()=> this.effectActions.pipe(
       ofType(AircraftActionTypes.ADD_AIRCRAFT),
       mergeMap((action : AddAircraftACTION) => {
-          return this.aircraftService.addAircraft(action.payload.aircraft).pipe(
+       console.log(action.payload, 'abcd');
+            return this.aircraftService.addAircraft(action.payload).pipe(
+
             map((aircraft) => new AddAircraftSuccessACTION(aircraft)),
             catchError((error) => of(new AddAircraftErrorACTION(error)))
           )

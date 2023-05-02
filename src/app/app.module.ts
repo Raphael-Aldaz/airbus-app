@@ -9,7 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { AircraftsComponent } from './components/aircrafts/aircrafts.component';
 import { AircraftsNavBarComponent } from './components/aircrafts/aircrafts-nav-bar/aircrafts-nav-bar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AircraftEffects } from 'src/ngrx/aircrafts.effects';
 import { LoginComponent } from './components/login/login.component';
@@ -25,6 +25,7 @@ import { AddAircraftsComponent } from './components/aircrafts/add-aircrafts/add-
     AircraftsNavBarComponent,
     LoginComponent,
     AddAircraftsComponent
+
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,8 @@ import { AddAircraftsComponent } from './components/aircrafts/add-aircrafts/add-
     EffectsModule.forRoot([AircraftEffects]),
     HttpClientModule,
     FormsModule,
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -34,7 +34,7 @@ export enum UserActionTypes{
 }
 export class AddAircraftACTION implements Action {
   type: AircraftActionTypes = AircraftActionTypes.ADD_AIRCRAFT;
-  constructor(public payload : any) { }
+  constructor(public payload : any) {console.log(payload, 'a') }
 }
 
 export class AddAircraftSuccessACTION implements Action {
