@@ -14,6 +14,7 @@ export class AircraftsComponent implements OnInit  {
   aircrafts$:Observable<AircraftsState> |null = null;
   readonly dataStateEnum = AircraftsStateEnum;
   showAddAircraftForm = false;
+  aircraftToDelete! : Aircraft;
 
   constructor( private store:Store<any>){}
   ngOnInit(): void {
@@ -23,6 +24,14 @@ export class AircraftsComponent implements OnInit  {
   }
   createAircrafts(aircraft: Aircraft) {
     this.store.dispatch(new AddAircraftACTION({value : aircraft}))
+  }
+
+  isObjectIsEmpty(object : any){
+    return Object.keys(object).length > 1
+  }
+
+  deleteAircraft(aircraft: Aircraft){
+    console.log(aircraft)
   }
 
 }

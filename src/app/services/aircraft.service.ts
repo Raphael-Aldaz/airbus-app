@@ -29,4 +29,8 @@ export class AircraftService {
   public addAircraft(aircraft: Aircraft): Observable<Aircraft> {
     return this.http.post<Aircraft>('http://localhost:3000/aircrafts', aircraft);
   }
+
+  public removeAircraft(aircraft: Aircraft): Observable<Aircraft> {
+    return this.http.delete<Aircraft>(`http://localhost:3000/aircrafts/${aircraft.id}`)
+  }
 }

@@ -38,14 +38,18 @@
             <td class="p-3 font-bold" *ngIf="aircraft.developpment === false">
               <span class="bg-red-400 text-gray-50 rounded-md px-2 p-2">{{aircraft.developpment}}</span>
 						</td>
-            <td class="p-3">
-
+            <td class="p-3" >
+              <ng-container *ngIf="isObjectIsEmpty(aircraft.modification)">
+                <ul *ngFor="let option of aircraft.modification" >
+                  <li>{{option}}</li>
+                </ul>
+              </ng-container>
 						</td>
 						<td class="p-3 ">
 							<a href="#" class="text-gray-400 hover:text-gray-100  mx-2">
 								<i class="material-icons-outlined text-base">edit</i>
 							</a>
-							<a href="#" class="text-gray-400 hover:text-gray-100  ml-2">
+							<a href="#" class="text-gray-400 hover:text-gray-100  ml-2"  (click)="deleteAircraft(aircraftToDelete)">
 								<i class="material-icons-round text-base">delete_outline</i>
 							</a>
 						</td>

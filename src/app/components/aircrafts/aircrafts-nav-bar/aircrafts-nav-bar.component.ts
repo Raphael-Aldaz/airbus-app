@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Aircraft } from 'src/app/model/aircraft.model';
-import { AircraftActionTypes, GetAllAircraftACTION, GetConceptedAircraftACTION, GetDesignedAircraftACTION, SearchAircraftAction } from 'src/ngrx/aircrafts.actions';
+import { AircraftActionTypes, GetAllAircraftACTION, GetConceptedAircraftACTION, GetDesignedAircraftACTION, SearchAircraftAction, UserIsConnectedACTION } from 'src/ngrx/aircrafts.actions';
 
 @Component({
   selector: 'app-aircrafts-nav-bar',
@@ -31,6 +31,10 @@ export class AircraftsNavBarComponent implements OnInit {
   }
   getConceptedAircraft(){
     this.store.dispatch(new GetConceptedAircraftACTION({}))
+  }
+  logOut() {
+    this.store.dispatch(new UserIsConnectedACTION(false))
+    localStorage.removeItem('user');
   }
 
 }

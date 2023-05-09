@@ -45,7 +45,6 @@
         {}
       ]
     },
-
     {
       "prog": "test",
       "design": false,
@@ -56,6 +55,17 @@
         "tail"
       ],
       "id": 9
+    },
+    {
+      "prog": "Aldaz",
+      "design": false,
+      "developpment": true,
+      "modification": [
+        "wings",
+        "tail",
+        "landingGear"
+      ],
+      "id": 10
     }
   ],
   "users": [

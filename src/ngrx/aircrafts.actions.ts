@@ -22,6 +22,10 @@ export enum AircraftActionTypes{
   ADD_AIRCRAFT = "[Aircraft] Add Aircraft",
   ADD_AIRCRAFT_SUCCESS = "[Aircraft] Add Aircraft Success",
   ADD_AIRCRAFT_ERROR = "[Aircraft] Add Aircraft Error",
+
+  DELETE_AIRCRAFT = "[Aircraft] Delete",
+  DELETE_AIRCRAFT_SUCCESS = "[Aircraft] Delete Aircraft Succes",
+  DELETE_AIRCRAFT_ERROR = "[Aircraft] Delete Aircreft Error"
 }
 
 export enum UserActionTypes{
@@ -32,9 +36,22 @@ export enum UserActionTypes{
   USER_IS_CONNECTED = "[User] User is Connected",
 
 }
+
+export class DeleteAicraftACTION implements Action{
+  type : AircraftActionTypes = AircraftActionTypes.DELETE_AIRCRAFT;
+  constructor(public payload : any) {}
+}
+export class DeleteAicraftSuccesACTION implements Action{
+  type : AircraftActionTypes = AircraftActionTypes.DELETE_AIRCRAFT_SUCCESS;
+  constructor(public payload : string) {}
+}
+export class DeleteAicraftErrorACTION implements Action{
+  type : AircraftActionTypes = AircraftActionTypes.DELETE_AIRCRAFT_ERROR;
+  constructor(public payload : string) {}
+}
 export class AddAircraftACTION implements Action {
   type: AircraftActionTypes = AircraftActionTypes.ADD_AIRCRAFT;
-  constructor(public payload : any) {console.log(payload, 'a') }
+  constructor(public payload : any){}
 }
 
 export class AddAircraftSuccessACTION implements Action {

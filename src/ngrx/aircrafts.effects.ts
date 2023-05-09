@@ -2,7 +2,7 @@ import { Action } from "@ngrx/store";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {concatMap, Observable, mergeMap, map, catchError,of, tap } from "rxjs";
 import { AircraftService } from "src/app/services/aircraft.service";
-import { AddAircraftACTION, AddAircraftSuccessACTION, AircraftActionTypes, GetAllAircraftErrorACTION, GetAllAircraftSuccessACTION, GetUserACTION, GetUserErrorACTION, GetUserSuccessACTION, SearchAircraftAction, UserActionTypes, UserIsConnectedACTION } from "./aircrafts.actions";
+import { AddAircraftACTION, AddAircraftSuccessACTION, AircraftActionTypes, DeleteAicraftACTION, DeleteAicraftErrorACTION, DeleteAicraftSuccesACTION, GetAllAircraftErrorACTION, GetAllAircraftSuccessACTION, GetUserACTION, GetUserErrorACTION, GetUserSuccessACTION, SearchAircraftAction, UserActionTypes, UserIsConnectedACTION } from "./aircrafts.actions";
 import { Injectable } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 import { AddAircraftErrorACTION } from "./aircrafts.actions";
@@ -70,6 +70,7 @@ export class AircraftEffects{
       mergeMap((action : GetUserACTION)=> {
         return this.authService.login(action.payload.value.email, action.payload.value.password).pipe(
           concatMap((user) =>{
+            console.log(user)
             if(user.length > 0){
               localStorage.setItem('user', JSON.stringify(user))
               return[
@@ -93,7 +94,6 @@ export class AircraftEffects{
     ()=> this.effectActions.pipe(
       ofType(AircraftActionTypes.ADD_AIRCRAFT),
       mergeMap((action : AddAircraftACTION) => {
-       console.log(action.payload, 'abcd');
             return this.aircraftService.addAircraft(action.payload).pipe(
 
             map((aircraft) => new AddAircraftSuccessACTION(aircraft)),
@@ -101,6 +101,18 @@ export class AircraftEffects{
           )
         }
       )
+    )
+  )
+
+  deleteAircraftEffect: Observable<Action> = createEffect(
+    ()=> this.effectActions.pipe(
+      ofType(AircraftActionTypes.DELETE_AIRCRAFT),
+      mergeMap((action : DeleteAicraftACTION) => {
+        return this.aircraftService.removeAircraft(action.payload).pipe(
+          map(() => new DeleteAicraftSuccesACTION("Succes")),
+          catchError((error) => of(new DeleteAicraftErrorACTION(error)))
+        )
+      })
     )
   )
 
