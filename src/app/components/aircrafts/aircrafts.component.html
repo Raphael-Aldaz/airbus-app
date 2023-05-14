@@ -1,18 +1,19 @@
 <app-nav-bar />
 <app-aircrafts-nav-bar  />
-<link
+<!-- <link
 	href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
 	rel="stylesheet">
 <div class="  min-h-screen bg-gray-900"  *ngIf="aircrafts$ | async as state">
 
 	<div class="col-span-12">
 		<div *ngIf="!showAddAircraftForm" class="overflow-auto lg:overflow-visible ">
+
 			<table class="table text-gray-400 border-separate space-y-6 text-sm">
 				<thead class="bg-gray-800 text-gray-500">
 					<tr>
 						<th class="p-3">ID</th>
 						<th class="p-3 text-left">Program</th>
-						<th class="p-3 text-left">Etude</th>
+ 						<th class="p-3 text-left">Etude</th>
 						<th class="p-3 text-left">Conception</th>
             <th class="p-3 text-left">Modification</th>
             <th class="p-3 text-left">Action</th>
@@ -26,7 +27,7 @@
 						<td class="p-3">
 							{{aircraft.prog}}
 						</td>
-						<td class="p-3 font-bold" *ngIf="aircraft.design === true">
+						 <td class="p-3 font-bold" *ngIf="aircraft.design === true">
               <span class="bg-green-400 text-gray-50 rounded-md px-2 p-2">{{aircraft.design}}</span>
 						</td>
             <td class="p-3 font-bold" *ngIf="aircraft.design === false">
@@ -56,6 +57,7 @@
 					</tr>
 				</tbody>
 			</table>
+
 		</div>
 	</div>
   <button (click)="showAddAircraftForm = true" *ngIf="state.aircraft.length > 0 && !showAddAircraftForm" class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-700">
@@ -65,28 +67,66 @@
     <app-add-aircrafts />
 
   </ng-container>
+  <div class="relative">
+    <button class="bg-blue-500 text-white px-4 py-2 rounded-md" onclick="toggleDropdown()">Afficher</button>
+    <div id="dropdown" class="hidden bg-gray-200 absolute top-0 left-0 mt-12 rounded-md shadow-lg w-64 transform transition-transform duration-300">
+      <p class="px-4 py-2">Contenu du dropdown</p>
+    </div>
+  </div>
 
-</div>
-<style>
-	.table {
-		border-spacing: 0 15px;
-	}
+</div> -->
+<table class="min-w-full divide-y divide-gray-200">
+  <thead>
+    <tr>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Program</th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200" *ngIf="aircrafts$ | async as state">
+    <ng-container *ngFor="let aircraft of state.aircraft">
 
-	i {
-		font-size: 1rem !important;
-	}
+    <tr  >
+      <td class="px-6 py-4 whitespace-nowrap" (click)="toggleDetails(aircraft.id)">
+        {{aircraft.id}}
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">
+        {{aircraft.prog}}
+      </td>
+    </tr>
 
-	.table tr {
-		border-radius: 20px;
-	}
+    <tr>
+      <div *ngIf="showDetails[aircraft.id]">
+      <td class="px-6 py-4 whitespace-nowrap" >
+        <td class="p-3 font-bold" *ngIf="aircraft.design === true">
+          <h3>Design</h3>
+          <span class="bg-green-400 text-gray-50 rounded-md px-2 p-2">{{aircraft.design}}</span>
+        </td>
+        <td class="p-3 font-bold" *ngIf="aircraft.design === false">
+          <h3>Design</h3>
+          <span class="bg-red-400 text-gray-50 rounded-md px-2 p-2 ">{{aircraft.design}}</span>
+        </td>
+        <td class="p-3 font-bold" *ngIf="aircraft.developpment === true">
+          <h3>Developpment</h3>
+          <span class="bg-green-400 text-gray-50 rounded-md px-2 p-2">{{aircraft.developpment}}</span>
+        </td>
+        <td class="p-3 font-bold" *ngIf="aircraft.developpment === false">
+          <h3>Developpment</h3>
+          <span class="bg-red-400 text-gray-50 rounded-md px-2 p-2">{{aircraft.developpment}}</span>
+        </td>
+        <td class="p-3" >
+          <ng-container *ngIf="isObjectIsEmpty(aircraft.modification)">
+            <h3>Modification</h3>
+            <ul *ngFor="let option of aircraft.modification" >
+              <li>{{option}}</li>
+            </ul>
+          </ng-container>
+        </td>
+      </div>
+    </tr>
 
-	tr td:nth-child(n+5),
-	tr th:nth-child(n+5) {
-		border-radius: 0 .625rem .625rem 0;
-	}
+  </ng-container>
+  </tbody>
+</table>
 
-	tr td:nth-child(1),
-	tr th:nth-child(1) {
-		border-radius: .625rem 0 0 .625rem;
-	}
-</style>
+
+

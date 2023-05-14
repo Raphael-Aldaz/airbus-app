@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { AddAircraftACTION } from 'src/ngrx/aircrafts.actions';
 import { Aircraft } from 'src/app/model/aircraft.model';
 
+
 @Component({
   selector: 'app-aircrafts',
   templateUrl: './aircrafts.component.html',
@@ -15,12 +16,16 @@ export class AircraftsComponent implements OnInit  {
   readonly dataStateEnum = AircraftsStateEnum;
   showAddAircraftForm = false;
   aircraftToDelete! : Aircraft;
+  showDetails: boolean[] = [];
 
   constructor( private store:Store<any>){}
   ngOnInit(): void {
     this.aircrafts$ = this.store.pipe(
       map((state) => state.state.aircraft),
     )
+  }
+  toggleDetails(index: number) {
+    this.showDetails[index] = !this.showDetails[index];
   }
   createAircrafts(aircraft: Aircraft) {
     this.store.dispatch(new AddAircraftACTION({value : aircraft}))
